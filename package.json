@@ -1,0 +1,23 @@
+{
+  "name": "login-app",
+  "version": "1.0.0",
+  "description": "API Rest para login",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marvinjk6/login-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marvinjk6/login-app/issues"
+  },
+  "homepage": "https://github.com/marvinjk6/login-app#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
