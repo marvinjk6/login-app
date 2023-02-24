@@ -16,3 +16,7 @@ Um servidor de login precisa minimamente conseguir registrar um usuário e fazer
 
 * como estamos tratando de dados sensíveis o front end sempre vai mandar os dados através de uma requisição POST
 * vamos exportar o router para importar em app.js usando o método use que serve para todo tipo de requisição
+
+## Controladores
+
+Agora criar o controlador com as middleware functions, exportá-las, importar em router - para deixar a aplicação mais organizada
