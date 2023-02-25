@@ -40,3 +40,17 @@ Vamos preparar o esquema para poder armazenar o usuário, as informações para 
     - no bloco try vamos usar o método save para salvar o usuário e enviar o usuário como resposta (essa é uma operação assíncrona precisamos do await antes de salvar, e do async antes da função)
     - no bloco catch se acontecer algum erro como o usuário não colocar um email que é obrigatório, é preciso sinalizar para o front end que aconteceu o erro, vamos mandar o res.status(404).send(error)
     - vamos usar express.json() para ter acesso ao body da requisição, ele pode ser passado na rota, mas como queremos sempre ter acesso ao body podemos passar em app.js - app.use express.json() isso quer dizer que vai pegar tudo que vier na requisição json e vai colocar dentro do body
+
+## Criptografando a senha
+
+Anteriormente usando o insomnia pelo método POST json foi possível salvar um usuário no banco de dados, porém existe um problema, a senha estava visível no banco, isso não pode acontecer nunca, é preciso criptografar a senha
+
+* vamos usar o módulo bcrypt que serve para criptografar coisas
+    - npm install bcryptjs
+
+* no controlador vamos importar o bcrypt
+    - lá em password vamos utilizar o método hashSync() 
+    que recebe como primeiro argumento a string que será criptografada, no nosso caso a senha mesmo que vem pelo body, o segundo argumento é o salt que é um número utilizado no algoritmo de criptografia, como padrão é 10 o que permite omitir o segundo argumento. Esse método cria um hash a partir da senha criada na hora de registrar o usuário, que depois vai ser comparado com a senha na hora de login
+
+    - foi feito uma validação que não permite colocar um email ja existente no banco de dados
+
