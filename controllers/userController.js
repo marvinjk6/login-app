@@ -1,10 +1,22 @@
+const User = require("../models/User")
 
+const register = async (req, res) => {
+    
+    const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+    })
 
-const register = (req, res) => {
-    res.send("Register READY")
+    try {
+        const savedUser = await user.save()
+        res.send(savedUser)
+    } catch(error) {
+        res.status(404).send(error)
+    }
 }
 
-const login = (req, res) => {
+const login = async (req, res) => {
     res.send("login READY")
 }
 
