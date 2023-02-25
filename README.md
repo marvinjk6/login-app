@@ -20,3 +20,10 @@ Um servidor de login precisa minimamente conseguir registrar um usuário e fazer
 ## Controladores
 
 Agora criar o controlador com as middleware functions, exportá-las, importar em router - para deixar a aplicação mais organizada
+
+## Banco de Dados - MongoDB (Mongoose)
+
+Vamos instalar o mongoose e conectar o banco de dados
+* eu usei O mongo localmente - na variavel de ambiente está a url usada ("mongodb://127.0.0.1/user") o normal seria usar "mongodb://localhost/user" mas o mongo não estava conectando então fiz esse ajuste
+
+* Existem algumas formas de saber se o mongoose conectou eu implementei dentro do método connect passando algumas options antes
