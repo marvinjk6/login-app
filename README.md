@@ -54,3 +54,14 @@ Anteriormente usando o insomnia pelo método POST json foi possível salvar um u
 
     - foi feito uma validação que não permite colocar um email ja existente no banco de dados
 
+## Login com o usuário
+
+A primeira coisa para fazer o login é verificar se o email existe no banco de dados, para depois ver se a senha bate ou não
+
+* se não existir o email no nosso banco a gente manda uma mensagem dizendo que Email ou senha não existe caso alguém esteja tentando hackear ele não vai saber se errou a senha ou o email
+
+* depois vamos verificar se a senha bate com a hash criada no momento do registro, utilizar o método compareSync(password, hashCreated) passando a senha como primeiro argumento e depois a hash que foi armazenada no banco
+
+* obs: aumentei o maxlength the password por causa do hash que possui muitos caracteres
+
+* fazer o teste com o insomnia

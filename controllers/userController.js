@@ -22,7 +22,17 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    res.send("login READY")
+
+    // verificando se o email existe no banco de dados
+    const selectedUser = await User.findOne({ email: req.body.email })
+    if (!selectedUser) return res.status(400).send("Email or Password incorrect")
+
+    // verificando a senha passada com o hash do banco de dados
+    const passwordAndUserMatch = bcrypt.compareSync(req.body.password, selectedUser.password)
+    if(!passwordAndUserMatch) return res.status(400).send("Email or Password incorrect")
+
+    res.send("user Logged")
+
 }
 
 module.exports = { register, login }
