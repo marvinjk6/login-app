@@ -32,7 +32,8 @@ const login = async (req, res) => {
     const passwordAndUserMatch = bcrypt.compareSync(req.body.password, selectedUser.password)
     if(!passwordAndUserMatch) return res.status(400).send("Email or Password incorrect")
 
-    const token = jwt.sign({ _id: selectedUser.id }, process.env.TOKEN_SECRET)
+    // criando o token, foi adicionado admin para proteger a rota, dando acesso apenas quando admin for true
+    const token = jwt.sign({ _id: selectedUser.id, admin: selectedUser.admin }, process.env.TOKEN_SECRET)
 
     res.header("authorization-token", token)
 

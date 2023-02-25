@@ -68,7 +68,7 @@ A primeira coisa para fazer o login é verificar se o email existe no banco de d
 
 ## Criando o Token
 
-Como estamos utlizando o modelo de API rest não armazenamos nenhum dado do usuário no nosse back end, todo vez que ele precisa acessar algo do back end ele precisa mandar algo que identifique ele, é inviavel mandar usuário e senha o tempo todo, para isso vamos criar um token que vai identificar o usuário
+Como estamos utlizando o modelo de API rest não armazenamos nenhum dado do usuário no nosse back end, todo vez que ele precisa acessar algo do back end ele precisa mandar algo que identifique ele, é inviável mandar usuário e senha o tempo todo, para isso vamos criar um token que vai identificar o usuário
 
 * vamos usar o módulo jsonwebtoken
     - npm install jsonwebtoken
@@ -78,3 +78,21 @@ Como estamos utlizando o modelo de API rest não armazenamos nenhum dado do usu�
 * o método sing() recebe algo que identifica o usuário e o segredo
 * depois vamos mandar o token atraves cabeçalho da resposta, res.header() recebe como primeiro argumento uma chave o segundo o valor(token)
 * no insomnia em header é possivel ver a chave definida e o valor dela
+
+## Protegendo Rotas
+
+Agora vamos mandar o token do front end (nesse caso pelo insomnia) para o nosso back end, aqui a intenção é saber como proteger uma rota e como validar o token
+
+* foi criada uma rota em app.js que apenas usuários logados e que são admin podem ter acesso
+
+* em controllers o arquivo authController vai verificar o token
+
+* em routes o arquivo adminRouter vai ter a rota de quem é admin, primeiro passo é importar o admin controller -> (auth), vamos colocar o auth na rota router.get("/", auth) que primeiro vai verificar se o token, e depois se é de admin se em qualquer uma das verificações falhar não será permitido acesso
+
+* com o insomnia quando registrar um usuário pelo rota POST localhost:3000/user/register o token é gerado e passado pelo header, em HEADERS no insomnia aparece authorization-token e o valor do token, a gente pega o token vai na rota GET localhost:3000/admin -> em Header no insomnia passamos a chave(authorization-token) e o valor para verificar
+
+* agora em authController em try vamos usar o método jwt.verify(token, secret) para verificar se o usuário possui o token de admin
+
+* no esquema vamos adicionar a chave admin como tipo boolean e valor default como false, em userController quando o for criar o token  passar admin também jwt.sign({..., admin: selectedUser.admin }, secret)
+
+* em adminRouter foi criada uma rota livre para quem está logado
