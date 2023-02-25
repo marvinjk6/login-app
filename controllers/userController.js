@@ -1,8 +1,15 @@
 const User = require("../models/User")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const { loginValidate, registerValidate } = require("./validade")
 
 const register = async (req, res) => {
+
+    // verificando se o registro foi executado com sucesso
+    // data que é tetornado em registerValidate e loginValidate é um objeto, estamos desestruturando ele pegando o erro por exemplo
+    // estamos enviando a mensagem, poderia ser o erro inteiro
+    const {error} = registerValidate(req.body)
+    if(error) return res.status(400).send(error.message)
 
     // verificando se já existe o email enviado
     const selectedUser = await User.findOne({ email: req.body.email })
@@ -23,6 +30,10 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+
+    // verificando se o login foi executado com sucesso
+    const {error} = loginValidate(req.body)
+    if(error) return res.status(400).send(error.message)
 
     // verificando se o email existe no banco de dados
     const selectedUser = await User.findOne({ email: req.body.email })

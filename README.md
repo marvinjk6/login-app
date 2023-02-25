@@ -96,3 +96,25 @@ Agora vamos mandar o token do front end (nesse caso pelo insomnia) para o nosso 
 * no esquema vamos adicionar a chave admin como tipo boolean e valor default como false, em userController quando o for criar o token  passar admin também jwt.sign({..., admin: selectedUser.admin }, secret)
 
 * em adminRouter foi criada uma rota livre para quem está logado
+
+## Validando a entrada
+
+
+O Esquema do mongoose diz que o tamanho mínimo para criar a senha é 6 caracteres, porém com a criptografia a senha fica com um tamanho muito maior independente de quantos caracteres o usuário digitar na hora de se registrar, e gente quer validar o dado que o usuário está enviando e não a criptografia que vai ser armazenado no banco de dados, vamos ajustar isso com o módulo joi
+
+link para a documentação do módulo Joi -> https://hapi.dev/tutorials/validation/
+
+* npm install @hapi/joi
+* em controllers criar o arquivo validate.js ->  nesse arquivo vamor ter duas funções uma pra validar o registro e outra pra validar o login. É muito parecido com o mongoose, vai ter um esquema e depois retornamos o esquema.validate(data) /data é um objeto/-> Ver a sintaxe no arquivo
+
+* importar as funções de validação em userController e usar nos métodos register e login
+
+
+#### Módulos usados
+
+* express
+* dotenv
+* mongoose
+* bcryptjs
+* jsonwebtoken
+* joi
