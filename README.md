@@ -65,3 +65,16 @@ A primeira coisa para fazer o login é verificar se o email existe no banco de d
 * obs: aumentei o maxlength the password por causa do hash que possui muitos caracteres
 
 * fazer o teste com o insomnia
+
+## Criando o Token
+
+Como estamos utlizando o modelo de API rest não armazenamos nenhum dado do usuário no nosse back end, todo vez que ele precisa acessar algo do back end ele precisa mandar algo que identifique ele, é inviavel mandar usuário e senha o tempo todo, para isso vamos criar um token que vai identificar o usuário
+
+* vamos usar o módulo jsonwebtoken
+    - npm install jsonwebtoken
+
+* em controller importar o jsonwebtoken
+* o jwt precisa de um segredo que vai ser criado em .env
+* o método sing() recebe algo que identifica o usuário e o segredo
+* depois vamos mandar o token atraves cabeçalho da resposta, res.header() recebe como primeiro argumento uma chave o segundo o valor(token)
+* no insomnia em header é possivel ver a chave definida e o valor dela
